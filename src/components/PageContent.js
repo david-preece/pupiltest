@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ListProperties from '../pages/ListProperties';
 import { Container } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
@@ -9,7 +10,7 @@ const styles = {
             marginTop: 20,
         },
     },
-    PageContent = () => {
+    PageContent = ({ classes }) => {
         return (
             <Container className={classes.container}>
                 <Switch>
@@ -20,5 +21,9 @@ const styles = {
             </Container>
         );
     };
+
+PageContent.propTypes = {
+    classes: PropTypes.any,
+};
 
 export default withStyles(styles)(PageContent);
