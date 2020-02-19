@@ -14,9 +14,12 @@ const styles = {
         return (
             <Container className={classes.container}>
                 <Switch>
-                    <Route exact path="/" key="Your Property List">
-                        <ListProperties />
-                    </Route>
+                    <Route
+                        exact
+                        path="/"
+                        key="Your Property List"
+                        render={props => <ListProperties {...props} />}
+                    ></Route>
                 </Switch>
             </Container>
         );
