@@ -1,21 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AppBar, CssBaseline, Button, Container, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import ListProperties from './pages/ListProperties';
+import PageHeader from './components/PageHeader';
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
-}
+const styles = {
+        container: {
+            marginTop: 20,
+        },
+    },
+    App = ({ classes }) => {
+        return (
+            <Router>
+                <CssBaseline />
+                <PageHeader />
 
-export default App;
+                <Container className={classes.container}>
+                    <Switch>
+                        <Route exact path="/" key="Your Property List">
+                            <ListProperties />
+                        </Route>
+                    </Switch>
+                </Container>
+            </Router>
+        );
+    };
+
+export default withStyles(styles)(App);
