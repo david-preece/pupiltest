@@ -4,6 +4,7 @@ import ListProperties from '../pages/ListProperties';
 import { Container } from '@material-ui/core';
 import { Switch, Route } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import AddProperty from '../pages/AddProperty';
 
 const styles = {
         container: {
@@ -20,6 +21,7 @@ const styles = {
                         key="Your Property List"
                         render={props => <ListProperties {...props} />}
                     ></Route>
+                    <Route exact path="/add" key="Add Property" render={props => <AddProperty {...props} />}></Route>
                 </Switch>
             </Container>
         );

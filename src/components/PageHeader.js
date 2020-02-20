@@ -3,6 +3,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { observer } from 'mobx-react';
 import React, { Component } from 'react';
 import { ApplicationStoreContext } from '../stores/ApplicationStore';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class PageHeader extends Component {
     state = {
@@ -12,6 +14,11 @@ class PageHeader extends Component {
     handleCloseMenu = () => this.setState({ anchorEl: null });
 
     handleOpenMenu = event => this.setState({ anchorEl: event.currentTarget });
+
+    handleNav = to => {
+        this.handleCloseMenu();
+        this.props.history.push(to);
+    };
 
     render() {
         const store = this.context;
@@ -38,9 +45,8 @@ class PageHeader extends Component {
                         open={Boolean(this.state.anchorEl)}
                         onClose={this.handleCloseMenu}
                     >
-                        <MenuItem onClick={this.handleCloseMenu}>List Your Properties</MenuItem>
-                        <MenuItem onClick={this.handleCloseMenu}>Add Property</MenuItem>
-                        <MenuItem onClick={this.handleCloseMenu}>Clear Properties</MenuItem>
+                        <MenuItem onClick={() => this.handleNav('/')}>List Your Properties</MenuItem>
+                        <MenuItem onClick={() => this.handleNav('/add')}>Add Property</MenuItem>
                     </Menu>
                     <Typography variant="h6">{store.pageTitle}</Typography>
                 </Toolbar>
@@ -50,5 +56,8 @@ class PageHeader extends Component {
 }
 
 PageHeader.contextType = ApplicationStoreContext;
+PageHeader.propTypes = {
+    history: PropTypes.object,
+};
 
-export default observer(PageHeader);
+export default observer(withRouter(PageHeader));
